@@ -72,17 +72,17 @@ function renderHorror(Item) {
   Item.forEach((Item) => {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
-    movieSlide.innerHTML = `
-        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
-        `;
+    movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
+        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        </div>`;
     carousel.appendChild(movieSlide);
     //console.log(Item.imageUrl);
     //Append again
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
-    movieSlide2.innerHTML = `
-        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
-        `;
+    movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
+        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+       </div>`;
     carousel2.appendChild(movieSlide2);
   });
 }
@@ -93,17 +93,17 @@ function renderComedy(Item) {
   Item.forEach((Item) => {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
-    movieSlide.innerHTML = `
-    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
-    `;
+    movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
+    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    </div>`;
     carousel.appendChild(movieSlide);
     // console.log(Item.imageUrl);
     //append again
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
-    movieSlide2.innerHTML = `
-    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
-    `;
+    movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
+    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    </div>`;
     carousel2.appendChild(movieSlide2);
   });
 }
@@ -114,25 +114,25 @@ function renderTv(Item) {
   Item.forEach((Item) => {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
-    movieSlide.innerHTML = `
-        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
-        `;
+    movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
+        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        </div>`;
     carousel.appendChild(movieSlide);
     //console.log(Item.imageUrl);
 
     //append again
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
-    movieSlide2.innerHTML = `
-        <a onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
-        `;
+    movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
+        <a onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        </div>`;
     carousel2.appendChild(movieSlide2);
   });
 }
 
-/*const collectTarget = (event) => {
-  console.log(event.target.src);
-};*/
+const collectTarget = (event) => {
+  console.log(event.target);
+};
 
 const loadPage = async () => {
   getGenres();
