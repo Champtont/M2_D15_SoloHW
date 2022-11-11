@@ -16,6 +16,16 @@
       label {
         color: white;
       }
+      h2 {
+        color: white;
+      }
+      li {
+        background-color: transparent;
+        color: white;
+        margin-bottom: 0.5em;
+        list-style: none;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -169,6 +179,31 @@
         </button>
         <button id="delete" class="btn btn-danger">Delete</button>
       </form>
+      <h2 class="mt-5">Current Movies</h2>
+      <h4>Horror</h4>
+      <ul id="Horror" class="list-group mt-5">
+        <li class="">An item</li>
+        <li class="">A second item</li>
+        <li class="">A third item</li>
+        <li class="">A fourth item</li>
+        <li class="">And a fifth one</li>
+      </ul>
+      <h4>Comedy</h4>
+      <ul id="Comedy" class="list-group mt-5">
+        <li class="">An item</li>
+        <li class="">A second item</li>
+        <li class="">A third item</li>
+        <li class="">A fourth item</li>
+        <li class="">And a fifth one</li>
+      </ul>
+      <h4>Tv Shows</h4>
+      <ul id="tvShows" class="list-group mt-5">
+        <li class="">An item</li>
+        <li class="">A second item</li>
+        <li class="">A third item</li>
+        <li class="">A fourth item</li>
+        <li class="">And a fifth one</li>
+      </ul>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -194,7 +229,7 @@
         const genreInput = document.getElementById("genre").value;
         const descriptionIn = document.getElementById("description").value;
         const imageInput = document.getElementById("image").value;
-        //post??
+        //post
         const newTitle = {
           name: `${titleInput}`,
           description: `${descriptionIn}`,
@@ -209,9 +244,35 @@
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(newTitle),
+        }).then((res) => {
+          if (res.ok) {
+            alert("Movie Successfully Added");
+          } else {
+            alert("Movie could Not be Added");
+          }
+          return res;
         });
 
         //console.log(titleInput, genreInput, descriptionIn, imageInput);
+      };
+
+      // Plan on Fetching alot
+      const getMovies = async (genre) => {
+        let res = await fetch(
+          `https://striveschool-api.herokuapp.com/api/movies/${genre}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        let info = await res.json();
+        console.log(info);
+      };
+      //populate Movie list
+      const populateMovies = async () => {
+        try {
+          let horrorMovies = getMovies(Horror);
+          console.log(horrorMovies);
+        } catch {}
       };
 
       submitbtn.addEventListener("click", getUserInput);
