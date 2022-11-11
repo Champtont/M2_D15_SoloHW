@@ -11,6 +11,11 @@ const getGenres = async () => {
   } catch (error) {}
 };
 
+let movieArray = [];
+
+let thisWindow = window.location.search;
+const urlParams = new URLSearchParams(thisWindow);
+console.log(thisWindow);
 const getHorror = async () => {
   try {
     let res = await fetch(
@@ -21,6 +26,7 @@ const getHorror = async () => {
     );
     let horrorFlix = await res.json();
     console.log(horrorFlix);
+    await movieArray.push(horrorFlix);
     // horrorFlix.forEach((movie) => {
     //   console.log(movie.imageUrl);
     // });
@@ -39,6 +45,7 @@ const getComedy = async () => {
     let funnyFlix = await res.json();
     console.log(funnyFlix);
     renderComedy(funnyFlix);
+    await movieArray.push(funnyFlix);
   } catch (error) {}
 };
 
@@ -53,6 +60,7 @@ const getTV = async () => {
     let tvShows = await res.json();
     console.log(tvShows);
     renderTv(tvShows);
+    await movieArray.push(tvShows);
   } catch (error) {}
 };
 
@@ -122,9 +130,9 @@ function renderTv(Item) {
   });
 }
 
-const collectTarget = (event) => {
+/*const collectTarget = (event) => {
   console.log(event.target.src);
-};
+};*/
 
 const loadPage = async () => {
   getGenres();
@@ -133,4 +141,5 @@ const loadPage = async () => {
   await getTV();
 };
 
-loadPage();
+let index = loadPage();
+console.log(movieArray);

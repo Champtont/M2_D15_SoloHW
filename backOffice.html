@@ -182,6 +182,9 @@
     ></script>
     <script>
       //get items for posting
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZWUzY2Q0YmUzZDAwMTU4NDVmZDAiLCJpYXQiOjE2NjgwODMyNjAsImV4cCI6MTY2OTI5Mjg2MH0.uNsrqEp_HPgrPhAwjziunQVeY6iQ11AA-FDwQ5LlOaI";
+
       const submitbtn = document.getElementById("submit");
 
       const getUserInput = (event) => {
@@ -191,13 +194,22 @@
         const genreInput = document.getElementById("genre").value;
         const descriptionIn = document.getElementById("description").value;
         const imageInput = document.getElementById("image").value;
-
+        //post??
         const newTitle = {
-          name: ``,
-          description: ``,
-          category: ``,
-          imageUrl: ``,
+          name: `${titleInput}`,
+          description: `${descriptionIn}`,
+          category: `${genreInput}`,
+          imageUrl: `${imageInput}`,
         };
+
+        fetch("https://striveschool-api.herokuapp.com/api/movies", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newTitle),
+        });
 
         //console.log(titleInput, genreInput, descriptionIn, imageInput);
       };
