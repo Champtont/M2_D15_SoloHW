@@ -59,40 +59,78 @@ const getTV = async () => {
 //render function would not allow me to pass value dynamically for section selection. I've wasted too much time here
 function renderHorror(Item) {
   const carousel = document.getElementById("horrorFlix");
+  const carousel2 = document.getElementById("horrorFlix2");
 
   Item.forEach((Item) => {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `
-<img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" />
-`;
+        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        `;
     carousel.appendChild(movieSlide);
-    console.log(Item.imageUrl);
+    //console.log(Item.imageUrl);
+    //Append again
+    const movieSlide2 = document.createElement("div");
+    movieSlide2.classList.add("col-md-2", "m-0");
+    movieSlide2.innerHTML = `
+        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        `;
+    carousel2.appendChild(movieSlide2);
   });
 }
 function renderComedy(Item) {
   const carousel = document.getElementById("funnyFlix");
+  const carousel2 = document.getElementById("funnyFlix2");
 
   Item.forEach((Item) => {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `
-  <img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" />
-  `;
+    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    `;
     carousel.appendChild(movieSlide);
-    console.log(Item.imageUrl);
+    // console.log(Item.imageUrl);
+    //append again
+    const movieSlide2 = document.createElement("div");
+    movieSlide2.classList.add("col-md-2", "m-0");
+    movieSlide2.innerHTML = `
+    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    `;
+    carousel2.appendChild(movieSlide2);
   });
 }
 function renderTv(Item) {
   const carousel = document.getElementById("tvShows");
+  const carousel2 = document.getElementById("tvShows2");
 
   Item.forEach((Item) => {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `
-  <img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" />
-  `;
+        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        `;
     carousel.appendChild(movieSlide);
-    console.log(Item.imageUrl);
+    //console.log(Item.imageUrl);
+
+    //append again
+    const movieSlide2 = document.createElement("div");
+    movieSlide2.classList.add("col-md-2", "m-0");
+    movieSlide2.innerHTML = `
+        <a onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100px; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        `;
+    carousel2.appendChild(movieSlide2);
   });
 }
+
+const collectTarget = (event) => {
+  console.log(event.target.src);
+};
+
+const loadPage = async () => {
+  getGenres();
+  await getHorror();
+  await getComedy();
+  await getTV();
+};
+
+loadPage();
