@@ -19,12 +19,40 @@
       h2 {
         color: white;
       }
+
+      h4 {
+        color: white;
+        background-color: rgb(71, 70, 70);
+      }
+      a {
+        text-decoration: none;
+      }
+
       li {
         background-color: transparent;
         color: white;
         margin-bottom: 0.5em;
         list-style: none;
         text-align: center;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+      #Horror :hover {
+        color: red;
+      }
+
+      #Comedy :hover {
+        color: blue;
+      }
+      #tvShows :hover {
+        color: yellow;
+      }
+      /*JS stuff*/
+      .selected {
+        border: green solid 2pt;
+      }
+      .hide {
+        display: none;
       }
     </style>
   </head>
@@ -177,33 +205,16 @@
         <button id="submit" type="submit" class="btn btn-primary">
           Submit
         </button>
+        <button id="edit" class="btn btn-success">Edit</button>
         <button id="delete" class="btn btn-danger">Delete</button>
       </form>
       <h2 class="mt-5">Current Movies</h2>
       <h4>Horror</h4>
-      <ul id="Horror" class="list-group mt-5">
-        <li class="">An item</li>
-        <li class="">A second item</li>
-        <li class="">A third item</li>
-        <li class="">A fourth item</li>
-        <li class="">And a fifth one</li>
-      </ul>
+      <ul id="Horror" class="list-group mt-2"></ul>
       <h4>Comedy</h4>
-      <ul id="Comedy" class="list-group mt-5">
-        <li class="">An item</li>
-        <li class="">A second item</li>
-        <li class="">A third item</li>
-        <li class="">A fourth item</li>
-        <li class="">And a fifth one</li>
-      </ul>
+      <ul id="Comedy" class="list-group mt-2"></ul>
       <h4>Tv Shows</h4>
-      <ul id="tvShows" class="list-group mt-5">
-        <li class="">An item</li>
-        <li class="">A second item</li>
-        <li class="">A third item</li>
-        <li class="">A fourth item</li>
-        <li class="">And a fifth one</li>
-      </ul>
+      <ul id="tvShows" class="list-group mt-2"></ul>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -216,11 +227,13 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      //play with params
       //get items for posting
       const token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZWUzY2Q0YmUzZDAwMTU4NDVmZDAiLCJpYXQiOjE2NjgwODMyNjAsImV4cCI6MTY2OTI5Mjg2MH0.uNsrqEp_HPgrPhAwjziunQVeY6iQ11AA-FDwQ5LlOaI";
 
       const submitbtn = document.getElementById("submit");
+      const editbtn = document.getElementById("edit");
 
       const getUserInput = (event) => {
         event.preventDefault();
@@ -257,23 +270,132 @@
       };
 
       // Plan on Fetching alot
-      const getMovies = async (genre) => {
-        let res = await fetch(
-          `https://striveschool-api.herokuapp.com/api/movies/${genre}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        let info = await res.json();
-        console.log(info);
-      };
-      //populate Movie list
-      const populateMovies = async () => {
+      const getHorror = async () => {
         try {
-          let horrorMovies = getMovies(Horror);
-          console.log(horrorMovies);
+          let res = await fetch(
+            "https://striveschool-api.herokuapp.com/api/movies/Horror",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          let horrorFlix = await res.json();
+          // horrorFlix.forEach((movie) => {
+          //   console.log(movie.imageUrl);
+          // });
+          console.log(horrorFlix);
+          await populateHorror(horrorFlix);
+          return horrorFlix;
+        } catch (error) {}
+      };
+
+      const getComedy = async () => {
+        try {
+          let res = await fetch(
+            "https://striveschool-api.herokuapp.com/api/movies/Comedy",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          let funnyFlix = await res.json();
+          // horrorFlix.forEach((movie) => {
+          //   console.log(movie.imageUrl);
+          // });
+          console.log(funnyFlix);
+          await populateComedy(funnyFlix);
+          return funnyFlix;
+        } catch (error) {}
+      };
+
+      const getTV = async () => {
+        try {
+          let res = await fetch(
+            "https://striveschool-api.herokuapp.com/api/movies/Tv",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          let tvShows = await res.json();
+          // horrorFlix.forEach((movie) => {
+          //   console.log(movie.imageUrl);
+          // });
+          console.log(tvShows);
+          await populateTv(tvShows);
+          return tvShows;
+        } catch (error) {}
+      };
+
+      const sendEdit = (event) => {
+        const selected = event.target;
+        selected.classList.toggle("selected");
+
+        console.log("getting there");
+      };
+
+      const getInfo = () => {
+        //get data
+        const url = new URLSearchParams(window.location.search);
+        const genre = url.get("category");
+        const description = url.get("description");
+        const image = url.get("image");
+        const name = url.get("name");
+
+        //visualize data
+        let titleInput = document.getElementById("title");
+        let genreInput = document.getElementById("genre");
+        let descriptionIn = document.getElementById("description");
+        let imageInput = document.getElementById("image");
+
+        titleInput.value = name;
+        genreInput.value = genre;
+        descriptionIn.value = description;
+        imageInput.value = image;
+
+        console.log("if you see me...");
+      };
+      getInfo();
+      //populate Movie list
+      const populateHorror = async (flix) => {
+        try {
+          const ul = document.getElementById("Horror");
+          flix.forEach((flix) => {
+            const li = document.createElement("div");
+            li.addEventListener("click", sendEdit);
+            li.innerHTML = `<a href="backOffice.html?name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}'"><li>${flix.name}</li></a>`;
+            ul.appendChild(li);
+          });
+          console.log("Im working");
         } catch {}
       };
+
+      const populateComedy = async (flix) => {
+        try {
+          const ul = document.getElementById("Comedy");
+          flix.forEach((flix) => {
+            const li = document.createElement("div");
+            li.addEventListener("click", sendEdit);
+            li.innerHTML = `<a href="backOffice.html?name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}"><li>${flix.name}</li></a>`;
+            ul.appendChild(li);
+          });
+          console.log("Im working");
+        } catch {}
+      };
+
+      const populateTv = async (flix) => {
+        try {
+          const ul = document.getElementById("tvShows");
+          flix.forEach((flix) => {
+            const li = document.createElement("div");
+            li.addEventListener("click", sendEdit);
+            li.innerHTML = `<a href="backOffice.html?name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}"><li>${flix.name}</li></a>`;
+            ul.appendChild(li);
+          });
+          console.log("Im working");
+        } catch {}
+      };
+
+      getHorror();
+      getComedy();
+      getTV();
 
       submitbtn.addEventListener("click", getUserInput);
       //get items for Deleting
