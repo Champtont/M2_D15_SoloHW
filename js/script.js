@@ -65,7 +65,7 @@ function renderHorror(Item) {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a href="backOffice.html?id=${Item._id}&name=${Item.name}&category=${Item.category}&description=${Item.description}&image=${Item.imageUrl}'"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
         </div>`;
     carousel.appendChild(movieSlide);
     //console.log(Item.imageUrl);
@@ -73,7 +73,7 @@ function renderHorror(Item) {
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
     movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a href="backOffice.html?id=${Item._id}&name=${Item.name}&category=${Item.category}&description=${Item.description}&image=${Item.imageUrl}'"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
        </div>`;
     carousel2.appendChild(movieSlide2);
   });
@@ -86,7 +86,7 @@ function renderComedy(Item) {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
-    <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    <a href="backOffice.html?id=${Item._id}&name=${Item.name}&category=${Item.category}&description=${Item.description}&image=${Item.imageUrl}'"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
     </div>`;
     carousel.appendChild(movieSlide);
     // console.log(Item.imageUrl);
@@ -94,7 +94,7 @@ function renderComedy(Item) {
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
     movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
-    <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    <a href="backOffice.html?id=${Item._id}&name=${Item.name}&category=${Item.category}&description=${Item.description}&image=${Item.imageUrl}'"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
     </div>`;
     carousel2.appendChild(movieSlide2);
   });
@@ -107,7 +107,7 @@ function renderTv(Item) {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a href="backOffice.html?id=${Item._id}&name=${Item.name}&category=${Item.category}&description=${Item.description}&image=${Item.imageUrl}'"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
         </div>`;
     carousel.appendChild(movieSlide);
     //console.log(Item.imageUrl);
@@ -116,7 +116,7 @@ function renderTv(Item) {
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
     movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a href="backOffice.html?id=${Item._id}&name=${Item.name}&category=${Item.category}&description=${Item.description}&image=${Item.imageUrl}'"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
         </div>`;
     carousel2.appendChild(movieSlide2);
   });
