@@ -360,7 +360,7 @@
           flix.forEach((flix) => {
             const li = document.createElement("div");
             li.addEventListener("click", sendEdit);
-            li.innerHTML = `<a href="backOffice.html?name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}'"><li>${flix.name}</li></a>`;
+            li.innerHTML = `<a href="backOffice.html?id=${flix._id}&name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}'"><li>${flix.name}</li></a>`;
             ul.appendChild(li);
           });
           console.log("Im working");
@@ -373,7 +373,7 @@
           flix.forEach((flix) => {
             const li = document.createElement("div");
             li.addEventListener("click", sendEdit);
-            li.innerHTML = `<a href="backOffice.html?name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}"><li>${flix.name}</li></a>`;
+            li.innerHTML = `<a href="backOffice.html?id=${flix._id}&name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}"><li>${flix.name}</li></a>`;
             ul.appendChild(li);
           });
           console.log("Im working");
@@ -386,12 +386,74 @@
           flix.forEach((flix) => {
             const li = document.createElement("div");
             li.addEventListener("click", sendEdit);
-            li.innerHTML = `<a href="backOffice.html?name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}"><li>${flix.name}</li></a>`;
+            li.innerHTML = `<a href="backOffice.html?id=${flix._id}&name=${flix.name}&category=${flix.category}&description=${flix.description}&image=${flix.imageUrl}"><li>${flix.name}</li></a>`;
             ul.appendChild(li);
           });
           console.log("Im working");
         } catch {}
       };
+
+      //edit button or PUT method function
+      /*const getParams = ()=>{
+          return url
+        }
+        getParams()*/
+      const url = new URLSearchParams(window.location.search);
+      let genre = url.get("category");
+      let id = url.get("id");
+
+      console.log(id);
+      const editData = async (event) => {
+        event.preventDefault();
+        let titleInput = document.getElementById("title").value;
+        let genreInput = document.getElementById("genre").value;
+        let descriptionIn = document.getElementById("description").value;
+        let imageInput = document.getElementById("image").value;
+
+        const changedData = {
+          name: `${titleInput}`,
+          description: `${descriptionIn}`,
+          category: `${genreInput}`,
+          imageUrl: `${imageInput}`,
+        };
+
+        // console.log(changedData);
+        try {
+          let answer = await fetch(
+            `https://striveschool-api.herokuapp.com/api/movies/${genre}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          let array = await answer.json();
+          array.forEach((item) => {
+            console.log(item._id);
+          });
+          let res = await fetch(
+            `https://striveschool-api.herokuapp.com/api/movies/${id}`,
+            {
+              method: "PUT",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(changedData),
+            }
+          ).then((res) => {
+            if (res.ok) {
+              alert("Movie Successfully Edited");
+            } else {
+              alert("Could not edit Movie");
+            }
+            console.log("i happen");
+            return res;
+          });
+        } catch (error) {
+          alert("not working");
+        }
+      };
+
+      editbtn.addEventListener("click", editData);
 
       getHorror();
       getComedy();
