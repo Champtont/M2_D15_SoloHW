@@ -11,11 +11,6 @@ const getGenres = async () => {
   } catch (error) {}
 };
 
-let movieArray = [];
-
-let thisWindow = window.location.search;
-const urlParams = new URLSearchParams(thisWindow);
-console.log(thisWindow);
 const getHorror = async () => {
   try {
     let res = await fetch(
@@ -26,7 +21,6 @@ const getHorror = async () => {
     );
     let horrorFlix = await res.json();
     console.log(horrorFlix);
-    await movieArray.push(horrorFlix);
     // horrorFlix.forEach((movie) => {
     //   console.log(movie.imageUrl);
     // });
@@ -45,7 +39,6 @@ const getComedy = async () => {
     let funnyFlix = await res.json();
     console.log(funnyFlix);
     renderComedy(funnyFlix);
-    await movieArray.push(funnyFlix);
   } catch (error) {}
 };
 
@@ -60,7 +53,6 @@ const getTV = async () => {
     let tvShows = await res.json();
     console.log(tvShows);
     renderTv(tvShows);
-    await movieArray.push(tvShows);
   } catch (error) {}
 };
 
@@ -73,7 +65,7 @@ function renderHorror(Item) {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
         </div>`;
     carousel.appendChild(movieSlide);
     //console.log(Item.imageUrl);
@@ -81,7 +73,7 @@ function renderHorror(Item) {
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
     movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
        </div>`;
     carousel2.appendChild(movieSlide2);
   });
@@ -94,7 +86,7 @@ function renderComedy(Item) {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
-    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
     </div>`;
     carousel.appendChild(movieSlide);
     // console.log(Item.imageUrl);
@@ -102,7 +94,7 @@ function renderComedy(Item) {
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
     movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
-    <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+    <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
     </div>`;
     carousel2.appendChild(movieSlide2);
   });
@@ -115,7 +107,7 @@ function renderTv(Item) {
     const movieSlide = document.createElement("div");
     movieSlide.classList.add("col-md-2", "m-0");
     movieSlide.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a  onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
         </div>`;
     carousel.appendChild(movieSlide);
     //console.log(Item.imageUrl);
@@ -124,15 +116,11 @@ function renderTv(Item) {
     const movieSlide2 = document.createElement("div");
     movieSlide2.classList.add("col-md-2", "m-0");
     movieSlide2.innerHTML = `<div class="col-12 m-0" style="height:300px">
-        <a onclick="collectTarget(event)"><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
+        <a><img class="movie-cover img-fluid m-0" style="width:100%; height:100%; object-fit:cover;" src="${Item.imageUrl}" /></a>
         </div>`;
     carousel2.appendChild(movieSlide2);
   });
 }
-
-const collectTarget = (event) => {
-  console.log(event.target);
-};
 
 const loadPage = async () => {
   getGenres();
@@ -142,4 +130,3 @@ const loadPage = async () => {
 };
 
 let index = loadPage();
-console.log(movieArray);
